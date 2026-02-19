@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "DealHawk India — Amazon.in Deal Finder & Price Tracker",
+  "short_name": "DealHawk India",
+  "version": "1.0.0",
+  "description": "Privacy-first Amazon.in deal finder. Discover heavily discounted items, price errors, and track prices locally — no data ever leaves your browser.",
+  "author": "DealHawk",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "DealHawk India"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://www.amazon.in/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.amazon.in/*"],
+      "css": ["content/content.css"],
+      "js": ["content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*", "assets/*"],
+      "matches": ["https://www.amazon.in/*"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

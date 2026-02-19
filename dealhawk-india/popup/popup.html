@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DealHawk India</title>
+  <link rel="stylesheet" href="popup.css">
+  <!-- No external font loading — privacy first! System fonts used via CSS fallback stack -->
+</head>
+
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <div class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28">
+                <stop offset="0%" stop-color="#ff6900" />
+                <stop offset="100%" stop-color="#ff4500" />
+              </linearGradient>
+            </defs>
+            <rect width="28" height="28" rx="6" fill="url(#logoGrad)" />
+            <text x="14" y="18" text-anchor="middle" fill="white" font-size="14" font-weight="bold"
+              font-family="Inter">₹↓</text>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>DealHawk India</h1>
+          <span class="tagline">Privacy-First Deal Finder</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btn-settings" class="icon-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-tab="deals">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+          <line x1="7" y1="7" x2="7.01" y2="7" />
+        </svg>
+        Deals Finder
+      </button>
+      <button class="nav-tab" data-tab="tracker">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+        Price Tracker
+      </button>
+      <button class="nav-tab" data-tab="alerts">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+        Alerts
+        <span id="alert-badge" class="badge hidden">0</span>
+      </button>
+    </nav>
+
+    <!-- ============ DEALS FINDER TAB ============ -->
+    <div class="tab-content active" id="tab-deals">
+      <!-- Search Bar -->
+      <div class="search-section">
+        <div class="search-bar">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input type="text" id="search-input" placeholder="Search deals on Amazon.in..." autocomplete="off">
+        </div>
+        <div class="filter-row">
+          <select id="category-select" class="filter-select">
+            <option value="">All Categories</option>
+            <option value="electronics">Electronics</option>
+            <option value="computers">Computers</option>
+            <option value="mobile-phones">Mobiles</option>
+            <option value="fashion">Fashion</option>
+            <option value="home-kitchen">Home & Kitchen</option>
+            <option value="appliances">Appliances</option>
+            <option value="beauty">Beauty</option>
+            <option value="sports">Sports & Fitness</option>
+            <option value="toys">Toys & Games</option>
+            <option value="books">Books</option>
+            <option value="grocery">Grocery</option>
+            <option value="automotive">Automotive</option>
+            <option value="health">Health & Personal Care</option>
+            <option value="garden">Garden & Outdoors</option>
+            <option value="pet-supplies">Pet Supplies</option>
+            <option value="office-products">Office Products</option>
+            <option value="musical-instruments">Musical Instruments</option>
+            <option value="videogames">Video Games</option>
+          </select>
+          <select id="sort-select" class="filter-select">
+            <option value="discount-desc">Highest Discount</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating-desc">Best Rated</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Discount Range Slider -->
+      <div class="discount-control">
+        <div class="discount-header">
+          <span class="discount-label">Minimum Discount</span>
+          <span class="discount-value" id="discount-value">50% OFF</span>
+        </div>
+        <div class="slider-container">
+          <input type="range" id="discount-slider" min="10" max="95" value="50" step="5" class="custom-slider">
+          <div class="slider-markers">
+            <span>10%</span>
+            <span>30%</span>
+            <span>50%</span>
+            <span>70%</span>
+            <span>90%+</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Filter Pills -->
+      <div class="quick-filters">
+        <button class="pill-btn" data-filter="price-error"
+          title="Items with unusually large discounts that may be pricing errors">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          Price Errors
+        </button>
+        <button class="pill-btn" data-filter="lightning" title="Amazon Lightning Deals">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+          </svg>
+          Lightning Deals
+        </button>
+        <button class="pill-btn" data-filter="low-stock" title="Items with low stock remaining">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          Low Stock
+        </button>
+        <button class="pill-btn" data-filter="prime" title="Amazon Prime eligible items">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          Prime Only
+        </button>
+      </div>
+
+      <!-- Action Button -->
+      <button id="btn-find-deals" class="primary-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        Find Deals on Amazon.in
+      </button>
+
+      <!-- Results -->
+      <div id="deals-results" class="results-container">
+        <div class="empty-state">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            opacity="0.3">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+            <line x1="7" y1="7" x2="7.01" y2="7" />
+          </svg>
+          <p>Configure your filters and click <strong>"Find Deals"</strong> to discover amazing discounts!</p>
+          <span class="hint">Tip: Set discount to 80%+ to find potential price errors</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PRICE TRACKER TAB ============ -->
+    <div class="tab-content" id="tab-tracker">
+      <div class="tracker-info">
+        <div class="info-card">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <div>
+            <h3>Local Price Tracking</h3>
+            <p>All price data is stored locally in your browser. Visit any Amazon.in product page to automatically track
+              it.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tracker-stats">
+        <div class="stat-card">
+          <span class="stat-number" id="stat-tracked">0</span>
+          <span class="stat-label">Products Tracked</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="stat-drops">0</span>
+          <span class="stat-label">Price Drops</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="stat-alerts-count">0</span>
+          <span class="stat-label">Active Alerts</span>
+        </div>
+      </div>
+
+      <!-- Tracked Products List -->
+      <div class="section-header">
+        <h3>Tracked Products</h3>
+        <button id="btn-clear-tracker" class="text-btn danger">Clear All</button>
+      </div>
+      <div id="tracked-products" class="tracked-list">
+        <div class="empty-state">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            opacity="0.3">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <p>No products tracked yet.</p>
+          <span class="hint">Visit any Amazon.in product page to start tracking</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ALERTS TAB ============ -->
+    <div class="tab-content" id="tab-alerts">
+      <div class="section-header">
+        <h3>Price Drop Alerts</h3>
+        <button id="btn-clear-alerts" class="text-btn danger">Clear All</button>
+      </div>
+      <div id="alerts-list" class="alerts-container">
+        <div class="empty-state">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            opacity="0.3">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <p>No alerts yet.</p>
+          <span class="hint">Track products and set target prices to receive alerts</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SETTINGS PANEL ============ -->
+    <div class="settings-panel hidden" id="settings-panel">
+      <div class="settings-header">
+        <h3>Settings</h3>
+        <button id="btn-close-settings" class="icon-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="settings-body">
+        <div class="setting-item">
+          <div class="setting-info">
+            <label>Price Error Threshold</label>
+            <span class="setting-desc">Discount % that signals a potential pricing error</span>
+          </div>
+          <input type="number" id="setting-price-error-threshold" class="setting-input" value="80" min="50" max="99">
+        </div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <label>Check Interval (hours)</label>
+            <span class="setting-desc">How often to check tracked prices</span>
+          </div>
+          <input type="number" id="setting-check-interval" class="setting-input" value="6" min="1" max="24">
+        </div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <label>Browser Notifications</label>
+            <span class="setting-desc">Show alerts for tracked price drops</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="setting-notifications" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <label>Show Price Chart on Amazon</label>
+            <span class="setting-desc">Embed price history chart on product pages</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="setting-show-chart" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <label>Highlight Deals on Search</label>
+            <span class="setting-desc">Highlight heavily discounted items in search results</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="setting-highlight-deals" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <label>Default Results Per Page</label>
+            <span class="setting-desc">Number of deal results to load</span>
+          </div>
+          <select id="setting-results-count" class="setting-input">
+            <option value="24">24</option>
+            <option value="48" selected>48</option>
+            <option value="96">96</option>
+          </select>
+        </div>
+
+        <div class="privacy-notice">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          <div>
+            <strong>Privacy Promise</strong>
+            <p>All data is stored locally in your browser using IndexedDB. No data is ever sent to external servers. No
+              analytics, no tracking, no cookies.</p>
+          </div>
+        </div>
+
+        <button id="btn-export-data" class="secondary-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Export Data
+        </button>
+        <button id="btn-import-data" class="secondary-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          Import Data
+        </button>
+        <input type="file" id="import-file-input" accept=".json" class="hidden">
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span class="privacy-badge">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+        100% Local · Zero Data Sent
+      </span>
+      <span class="version">v1.0.0</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>

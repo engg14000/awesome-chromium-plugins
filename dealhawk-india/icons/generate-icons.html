@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head><title>Generate DealHawk Icons</title></head>
+<body>
+<h2>Right-click each icon and "Save image as..." to save them as PNG files in this folder.</h2>
+<p>Save as: icon16.png, icon48.png, icon128.png</p>
+<div id="icons"></div>
+<script>
+const sizes = [16, 48, 128];
+const container = document.getElementById('icons');
+
+sizes.forEach(size => {
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  
+  // Background gradient
+  const grad = ctx.createLinearGradient(0, 0, size, size);
+  grad.addColorStop(0, '#ff6900');
+  grad.addColorStop(1, '#ff4500');
+  ctx.fillStyle = grad;
+  
+  // Rounded rect
+  const r = size * 0.18;
+  ctx.beginPath();
+  ctx.moveTo(r, 0);
+  ctx.lineTo(size - r, 0);
+  ctx.quadraticCurveTo(size, 0, size, r);
+  ctx.lineTo(size, size - r);
+  ctx.quadraticCurveTo(size, size, size - r, size);
+  ctx.lineTo(r, size);
+  ctx.quadraticCurveTo(0, size, 0, size - r);
+  ctx.lineTo(0, r);
+  ctx.quadraticCurveTo(0, 0, r, 0);
+  ctx.closePath();
+  ctx.fill();
+
+  // Hawk/deal icon — stylized "₹" with down arrow
+  ctx.fillStyle = '#fff';
+  ctx.font = `bold ${size * 0.55}px Arial`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('₹↓', size / 2, size / 2);
+
+  const img = document.createElement('img');
+  img.src = canvas.toDataURL('image/png');
+  img.style.margin = '10px';
+  img.title = `icon${size}.png`;
+  
+  const label = document.createElement('div');
+  label.textContent = `icon${size}.png (${size}x${size})`;
+  label.style.fontFamily = 'monospace';
+  
+  const wrapper = document.createElement('div');
+  wrapper.style.display = 'inline-block';
+  wrapper.style.textAlign = 'center';
+  wrapper.appendChild(img);
+  wrapper.appendChild(label);
+  container.appendChild(wrapper);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+/* ===== DealHawk India — Content Script Styles ===== */
+/* Injected into Amazon.in pages */
+
+/* ---------- Price History Chart Container ---------- */
+#dealhawk-chart-container {
+    margin: 16px 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+#dealhawk-chart-wrapper {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+/* Chart Header */
+.dh-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.dh-chart-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dh-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #ff6900, #ff4500);
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.dh-brand-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f1f5f9;
+    letter-spacing: -0.2px;
+}
+
+.dh-chart-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.dh-period-btn {
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: inherit;
+    color: #94a3b8;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.dh-period-btn:hover {
+    color: #f1f5f9;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.dh-period-btn.active {
+    color: #ff6900;
+    background: rgba(255, 105, 0, 0.1);
+    border-color: rgba(255, 105, 0, 0.3);
+}
+
+/* Chart Stats Row */
+.dh-chart-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.dh-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.dh-stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dh-stat-value {
+    font-size: 14px;
+    font-weight: 800;
+    color: #f1f5f9;
+    margin-top: 2px;
+}
+
+.dh-stat-value.dh-current {
+    color: #ff6900;
+}
+
+.dh-stat-value.dh-lowest {
+    color: #10b981;
+}
+
+.dh-stat-value.dh-highest {
+    color: #ef4444;
+}
+
+.dh-stat-value.dh-average {
+    color: #3b82f6;
+}
+
+/* Canvas */
+#dealhawk-price-canvas {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    cursor: crosshair;
+}
+
+/* Tooltip */
+.dh-chart-tooltip {
+    position: absolute;
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 6px 10px;
+    pointer-events: none;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.dh-tooltip-date {
+    display: block;
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.dh-tooltip-price {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    color: #ff6900;
+    margin-top: 1px;
+}
+
+/* Chart Footer */
+.dh-chart-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dh-alert-setup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.dh-input {
+    width: 100px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-family: inherit;
+    color: #f1f5f9;
+    background: #1a2035;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+.dh-input:focus {
+    border-color: #ff6900;
+    box-shadow: 0 0 0 3px rgba(255, 105, 0, 0.15);
+}
+
+.dh-input::placeholder {
+    color: #64748b;
+}
+
+.dh-btn-primary {
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: inherit;
+    color: #fff;
+    background: linear-gradient(135deg, #ff6900, #ff4500);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(255, 105, 0, 0.25);
+}
+
+.dh-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(255, 105, 0, 0.3);
+}
+
+.dh-privacy-note {
+    font-size: 10px;
+    color: #10b981;
+    font-weight: 600;
+}
+
+/* ---------- Deal Analysis Badge ---------- */
+#dealhawk-deal-badge {
+    margin: 8px 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+.dh-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    animation: dhBadgeIn 0.4s ease forwards;
+}
+
+@keyframes dhBadgeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dh-badge-error {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.dh-badge-great {
+    background: rgba(255, 105, 0, 0.08);
+    border: 1px solid rgba(255, 105, 0, 0.2);
+}
+
+.dh-badge-good {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dh-badge-icon {
+    font-size: 20px;
+}
+
+.dh-badge-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dh-badge-title {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dh-badge-error .dh-badge-title {
+    color: #ef4444;
+}
+
+.dh-badge-great .dh-badge-title {
+    color: #ff6900;
+}
+
+.dh-badge-good .dh-badge-title {
+    color: #10b981;
+}
+
+.dh-badge-detail {
+    font-size: 11px;
+    color: #64748b;
+}
+
+/* ---------- Search Results Tags ---------- */
+.dh-search-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    animation: dhTagIn 0.3s ease forwards;
+}
+
+@keyframes dhTagIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.dh-tag-error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.dh-tag-deal {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dh-tag-stock {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+/* ---------- In-page Notification ---------- */
+.dh-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    background: #1e293b;
+    color: #f1f5f9;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 999999;
+    animation: dhNotifIn 0.3s ease forwards;
+    transition: all 0.3s ease;
+}
+
+@keyframes dhNotifIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
