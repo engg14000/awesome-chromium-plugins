@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Replacer Pro</title>
+  <link rel="stylesheet" href="popup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Word Replacer <span>Pro</span></h1>
+    </header>
+    
+    <main>
+      <div class="input-group">
+        <label for="find-word">Find Word:</label>
+        <input type="text" id="find-word" placeholder="e.g. apple, banana, cherry">
+      </div>
+      
+      <div class="input-group">
+        <label for="replace-word">Replace With:</label>
+        <input type="text" id="replace-word" placeholder="e.g. teh">
+      </div>
+      
+      <button id="save-btn" class="primary-btn">Save & Apply</button>
+      <span id="save-status" class="status-msg"></span>
+
+      <div class="stats-card">
+        <h3>Lifetime Replacements</h3>
+        <div class="counter" id="counter">0</div>
+        <button id="reset-btn" class="secondary-btn">Reset Counter</button>
+      </div>
+    </main>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
