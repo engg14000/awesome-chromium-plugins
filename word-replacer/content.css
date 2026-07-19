@@ -1,0 +1,54 @@
+.wrp-firework-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2147483647; /* max z-index */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  animation: wrp-fade-out 4s forwards;
+}
+
+.wrp-message {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 20px #ff00ff, 0 0 10px #00ffff, 0 0 30px #ffffff;
+  animation: wrp-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), wrp-pulse 1s infinite alternate;
+  z-index: 2;
+  text-align: center;
+}
+
+.wrp-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: wrp-explode 1.5s ease-out forwards;
+}
+
+@keyframes wrp-fade-out {
+  0%, 80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes wrp-pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes wrp-pulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+@keyframes wrp-explode {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
